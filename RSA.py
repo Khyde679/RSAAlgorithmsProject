@@ -95,6 +95,17 @@ def generate_rsa_keys(bits=1024):
     
     return public_key, private_key, p, q
 
+def generate_digital_signature(private_key, message, n):
+    signature = (message**private_key) % n
+    return signature
+
+def verify_digital_signature(signature, public_key, n, message):
+    if ((signature**public_key) % n == message):
+        valid = True
+    else:
+        valid = False
+    return valid
+
 def main():
     print("Generating RSA keys...")
     print("=" * 200)
